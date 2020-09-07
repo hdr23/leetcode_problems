@@ -117,8 +117,12 @@ TreeNode* LC::convertToBST(vector<int>& nums) {
 }
 
 TreeNode* LC::convertToBSTHelper(vector<int>& nums, int start, int end) {
+    if(left > right) return nullptr;
     int midpoint = (start+end)/2;
     TreeNode* root = new TreeNode(nums[midpoint]);
+    root->left = convertToBSTHelper(nums, 0, midpoint-1);
+    root->right = convertToBSTHelper(nums, midpoint+1, nums.size()-1);
+    return root;
 
 }
 
