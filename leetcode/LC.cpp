@@ -125,17 +125,196 @@ TreeNode* LC::convertToBSTHelper(vector<int>& nums, int start, int end) {
     return root;
 
 }
+/*************************************
+ * Single Number
+ *
+ * Description: 
+ * Given a non-empty array of integers, 
+ * every element appears twice except for one. 
+ * Find that single one.
+ *
+ * Test Case: [2,2,1]
+ * Result: 1
+ ************************************/
+int LC::singleNumber(vector<int>& nums) {
+    map<int, int> m;
+
+    for(int i: nums) {
+        m[i]++;
+    }
+
+    for(auto i: m) {
+        if(i.second != 2) return i.first;
+    }
+
+    return -1;
+}
+/*************************************
+ * Fizz Buzz
+ *
+ * Description: 
+ * Write a program that outputs the string 
+ * representation of numbers from 1 to n.
+
+ * But for multiples of three it should output 
+ * “Fizz” instead of the number and for the multiples 
+ * of five output “Buzz”. For numbers which are 
+ * multiples of both three and five output “FizzBuzz”.
+ * 
+ ************************************/
+vector<string> LC::fizzBuzz(int n) {
+    vector<string> res;
+    
+    for(int i=1;i<=n;i++) {
+        if(i % 3 == 0 && i % 5 == 0) {
+            res.push_back("FizzBuzz");
+        }
+        else if(i % 3 == 0) {
+            res.push_back("Fizz");
+        }
+        else if(i % 5 == 0) {
+            res.push_back("Buzz");
+        }
+        else {
+            res.push_back(to_string(i));
+        }
+    }
+    
+    return res;
+}
+/*************************************
+ * Reverse Linked List
+ *
+ * Description: 
+ * Reverse a singely linked list.
+
+ * Test Case: 1->2->3->4->5->NULL
+ * Result: 5->4->3->2->1->NULL
+ *
+ ************************************/
+ListNode* LC::reverseList(ListNode* head) {
+    ListNode* prev = nullptr;
+    ListNode* next = nullptr;
+    ListNode* current = head;
+
+    while(current != nullptr) {
+        next = current->next;
+
+        current->next = prev;
+
+        prev = current;
+        current = next;
+    }
+
+    return prev;
+}
+/*************************************
+ * Delete Node in Linked List 
+ *
+ * Description: 
+ * Write a function to delete a node in a 
+ * singly-linked list. You will not be given 
+ * access to the head of the list, instead you 
+ * will be given access to the node to be 
+ * deleted directly.
+
+ * It is guaranteed that the node to be deleted is not a 
+ * tail node in the list.
+
+ * For this problem, a height-balanced binary
+ * tree is defined as a binary tree in which the 
+ * depth of the two subtrees of every node never 
+ * differ by more than 1.
+ *
+ ************************************/
+void LC::deleteNode(ListNode* node) {
+    node->val = node->next->val;
+    node->next = node->next->next;
+}
+/*************************************
+ * Majority Element
+ *
+ * Description: 
+ * Given an array of size n, find the majority element. 
+ * The majority element is the element that appears more 
+ * than ⌊ n/2 ⌋ times.
+
+ * You may assume that the array is non-empty and the majority 
+ * element always exist in the array.
+ * 
+ * Test Case: [3,2,3]
+ * Result: 3
+ ************************************/
+int LC::majorityElement(vector<int>& nums) {
+    int bound = nums.size()/2;
+    map<int,int> m;
+
+    for(int i: nums) {
+        m[i]++;
+    }
+
+    for(auto it: m) {
+        if(it.second > bound) return it.first;
+    }
+
+    return -1;
+}
+/*************************************
+ * Move Zeroes
+ *
+ * Description: 
+ * Given an array nums, write a function to move 
+ * all 0's to the end of it while maintaining the 
+ * relative order of the non-zero elements.
+ * 
+ * Test Case: [0, 1, 0, 3, 12]
+ * Result: [1, 3, 12, 0, 0]
+ ************************************/
+void moveZeroes(vector<int>& nums) {
+    int count = 0;
+
+    for(int i: nums) {
+        if(i == 0) count++;
+    }
+
+    vector<int>::iterator it = remove(nums.begin(), nums.end(), 0);
+    //1, 3, 12, null, null
+    //           ^it
+    nums.erase(it, nums.end());
+
+    while(count) {
+        nums.push_back(0);
+    }
+}
+/*************************************
+ * Valid Anagram
+ *
+ * Description: 
+ * Given two strings s and t , write a 
+ * function to determine if t is an anagram of s.
+ * 
+ * Test Case: "anagram", "nagaram"
+ * Result: true
+ ************************************/
+bool LC::isAnagram(string s, string t) {
+    map<char, int> sM;
+    map<char, int> sT;
+
+    for(char c: s) {
+        sM[c]++;
+    }
+
+    for(char c: t) {
+        sT[c]++;
+    }
+
+    if(sM == sT) return true;
+
+    return false;
+}
 
 int main(void) {
     LC lc;
-    TreeNode* root = new TreeNode(3);
-    root->left = new TreeNode(9);
-    root->right = new TreeNode(20);
-    root->right->right = new TreeNode(7);
-    root->right->left = new TreeNode(15);
-    int result = lc.maxDepthBT(root);
-
-    root = lc.invertTree(root);
 
     return 0;
 
