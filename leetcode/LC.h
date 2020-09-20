@@ -35,6 +35,7 @@ class LC {
         int singleNumber(vector<int>& nums);
         int majorityElement(vector<int>& nums);
         bool isAnagram(string s, string t);
+        TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2);
         TreeNode* invertTree(TreeNode* root);
         TreeNode* invertTreeIter(TreeNode* root);
         TreeNode* convertToBST(vector<int>& nums);

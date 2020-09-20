@@ -73,6 +73,7 @@ TreeNode* LC::invertTree(TreeNode* root) {
 
     return root;
 }
+
 /************************************
  * 
  * Invert a binary tree (Iterative)
@@ -95,6 +96,41 @@ TreeNode * LC::invertTreeIter(TreeNode* root) {
 
     return root;
 }
+
+/************************************
+ * 
+ * Merge two binary trees. 
+ *
+ * Example:
+ * 
+ * Input:
+ * 
+ *      Tree 1                     Tree 2                  
+ *         1                         2                             
+ *        / \                       / \                            
+ *       3   2                     1   3                        
+ *      /                           \   \                      
+ *     5                             4   7  
+ * 
+ * Output:
+ * 
+ *       3
+ *	    / \
+ *	   4   5
+ *	  / \   \ 
+ *	 5   4   7 
+ *
+ ***********************************/
+TreeNode* LC::mergeTrees(TreeNode* t1, TreeNode* t2) {
+    if(t1 == nullptr) return t2;
+    if(t2 == nullptr) return t1;
+    t1->val = t1->val + t2->val;
+    t1->left = this->mergeTrees(t1->left, t2->left);
+    t2->right = this->mergeTrees(t1->right, t2->right);
+
+    return t1;
+}
+
 /*************************************
  * Convert Sorted Array to BST
  *
@@ -125,6 +161,7 @@ TreeNode* LC::convertToBSTHelper(vector<int>& nums, int start, int end) {
     return root;
 
 }
+
 /*************************************
  * Single Number
  *
@@ -149,6 +186,7 @@ int LC::singleNumber(vector<int>& nums) {
 
     return -1;
 }
+
 /*************************************
  * Fizz Buzz
  *
@@ -315,6 +353,7 @@ bool LC::isAnagram(string s, string t) {
 
 int main(void) {
     LC lc;
+    lc.isAnagram("string1", "string2");
 
     return 0;
 
