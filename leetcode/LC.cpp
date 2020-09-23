@@ -297,6 +297,97 @@ int LC::majorityElement(vector<int>& nums) {
 
     return -1;
 }
+
+/*************************************
+ * Merge Two Sorted Lists
+ *
+ * Description: 
+ * Merge two sorted linked lists and return 
+ * it as a new sorted list. The new list should 
+ * be made by splicing together the nodes of 
+ * the first two lists.
+ ************************************/
+ListNode* LC::mergeTwoLists(ListNode* l1, ListNode* l2) {
+    ListNode dummyNode(-1);
+    ListNode* lastNode(&dummyNode);
+
+    while(l1 != nullptr && l2 != nullptr) {
+        if(l1->val < l2->val) {
+            lastNode->next = l1;
+            l1 = l1->next;
+        }
+        else {
+            lastNode->next = l2;
+            l2 = l2->next;
+        }
+        lastNode = lastNode->next;
+    }
+
+    if(l1 == nullptr) return l2;
+    if(l2 == nullptr) return l1;
+
+    return dummyNode.next;
+}
+
+/*************************************
+ * Two Sum
+ *
+ * Description: 
+ * Given an array of integers nums and an integer target, 
+ * return indices of the two numbers such that they add up to target.
+ *
+ * You may assume that each input would have exactly one solution, and 
+ * you may not use the same element twice.
+
+ * You can return the answer in any order.
+ * 
+ * Input: nums = [2,7,11,15], target = 9
+ * Output: [0,1]
+ ************************************/
+vector<int> LC::twoSum(vector<int>& nums, int target) {
+    map<int, int> m;
+    map<int, int>::iterator it;
+
+    for(int i=0;i<nums.size();i++) {
+        int complement = target - nums[i];
+        it = m.find(complement);
+
+        if(it != m.end()) {
+            return vector<int>{i, it->second};
+        }
+        else {
+            m.insert(make_pair(nums[i], i));
+        }
+    }
+
+    return vector<int>{-1,-1};
+}
+
+/*************************************
+ * Best Time to Buy and Stock
+ *
+ * Description: 
+ * Say you have an array for which the ith element 
+ * is the price of a given stock on day i.
+ * If you were only permitted to complete at most one 
+ * transaction (i.e., buy one and sell one share of the stock), 
+ * design an algorithm to find the maximum profit.
+ * 
+ * Note that you cannot sell a stock before you buy one.
+ * 
+ * Input: [7,1,5,3,6,4]
+ * Output: 5
+ * Explanation: 
+ * Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+ * Not 7-1 = 6, as selling price needs to be larger than buying price.
+ ************************************/
+int LC::maxProfit(vector<int>& prices) {
+    int minVal = INT32_MAX;
+    int profit = 0;
+
+    return 1;
+}
+
 /*************************************
  * Move Zeroes
  *

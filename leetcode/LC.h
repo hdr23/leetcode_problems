@@ -31,9 +31,11 @@ class LC {
     private:
     public:
         vector<string> fizzBuzz(int n);
+        vector<int> twoSum(vector<int>& nums, int target); 
         int maxDepthBT(TreeNode* root);
         int singleNumber(vector<int>& nums);
         int majorityElement(vector<int>& nums);
+        int maxProfit(vector<int>& prices);
         bool isAnagram(string s, string t);
         TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2);
         TreeNode* invertTree(TreeNode* root);
@@ -41,6 +43,7 @@ class LC {
         TreeNode* convertToBST(vector<int>& nums);
         TreeNode* convertToBSTHelper(vector<int>& nums, int begin, int end);
         ListNode* reverseList(ListNode* head);
+        ListNode* mergeTwoLists(ListNode* l1, ListNode* l2);
         void reverseStr(string s);
         void deleteNode(ListNode* node);
 
